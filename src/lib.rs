@@ -143,8 +143,8 @@ pub struct Categorical {
 ///
 /// let law = Law {
 ///     target_attribute: "age".to_string(),
-///     condition: Box::new(|thing: &Thing| thing.get_attribute_value("age").is_some()),
-///     derivation_fn: Box::new(|thing: &Thing| {
+///     condition: Arc::new(|thing: &Thing| thing.get_attribute_value("age").is_some()),
+///     derivation_fn: Arc::new(|thing: &Thing| {
 ///         let age = thing.get_attribute_value("age").and_then(|value| match value {
 ///             Value::Quantitative(quant) => quant.value,
 ///             _ => None,
@@ -188,7 +188,7 @@ impl Debug for Law {
 ///
 /// ```
 /// use std::collections::HashMap;
-/// use thingverse::{Thing, Attribute, Value, Categorical};
+/// use thingverse::*;
 ///
 /// let mut attributes = HashMap::new();
 /// attributes.insert("name".to_string(), Attribute {
@@ -229,7 +229,7 @@ impl Thing {
     /// # Examples
     ///
     /// ```
-    /// use thingverse::{Thing, Attribute, Value, Quantitative};
+    /// use thingverse::*;
     ///
     /// let mut thing = Thing::new();
     /// let attribute = Attribute {
@@ -256,7 +256,7 @@ impl Thing {
     /// # Examples
     ///
     /// ```
-    /// use thingverse::{Thing, Attribute, Value, Categorical};
+    /// use thingverse::*;
     ///
     /// let mut thing = Thing::new();
     /// let attribute = Attribute {
@@ -286,7 +286,7 @@ impl Thing {
     /// # Examples
     ///
     /// ```
-    /// use thingverse::{Thing, Attribute, Value, Quantitative};
+    /// use thingverse::*;
     ///
     /// let mut thing = Thing::new();
     /// let attribute = Attribute {
@@ -325,15 +325,15 @@ impl Thing {
 /// # Examples
 ///
 /// ```
-/// use thingverse::{Universe, Thing, Law, Value, Quantitative};
+/// use thingverse::*;
 ///
 /// let mut universe = Universe::new();
 ///
 /// // Add a law to the universe
 /// let law = Law {
 ///     target_attribute: "age".to_string(),
-///     condition: Box::new(|thing: &Thing| thing.get_attribute_value("age").is_some()),
-///     derivation_fn: Box::new(|thing: &Thing| {
+///     condition: Arc::new(|thing: &Thing| thing.get_attribute_value("age").is_some()),
+///     derivation_fn: Arc::new(|thing: &Thing| {
 ///         let age = thing.get_attribute_value("age").and_then(|value| match value {
 ///             Value::Quantitative(quant) => quant.value,
 ///             _ => None,
@@ -416,8 +416,8 @@ impl Universe {
     ///
     /// let law = Law {
     ///     target_attribute: "age".to_string(),
-    ///     condition: Box::new(|thing: &Thing| thing.get_attribute_value("age").is_some()),
-    ///     derivation_fn: Box::new(|thing: &Thing| {
+    ///     condition: Arc::new(|thing: &Thing| thing.get_attribute_value("age").is_some()),
+    ///     derivation_fn: Arc::new(|thing: &Thing| {
     ///         let age = thing.get_attribute_value("age").and_then(|value| match value {
     ///             Value::Quantitative(quant) => quant.value,
     ///             _ => None,
@@ -446,15 +446,15 @@ impl Universe {
     /// # Examples
     ///
     /// ```
-    /// use thingverse::{Universe, Thing, Law, Value, Quantitative};
+    /// use thingverse::*;
 
     /// let mut universe = Universe::new();
     ///
     /// // Add a law to the universe
     /// let law = Law {
     ///     target_attribute: "age".to_string(),
-    ///     condition: Box::new(|thing: &Thing| thing.get_attribute_value("age").is_some()),
-    ///     derivation_fn: Box::new(|thing: &Thing| {
+    ///     condition: Arc::new(|thing: &Thing| thing.get_attribute_value("age").is_some()),
+    ///     derivation_fn: Arc::new(|thing: &Thing| {
     ///         let age = thing.get_attribute_value("age").and_then(|value| match value {
     ///             Value::Quantitative(quant) => quant.value,
     ///             _ => None,
